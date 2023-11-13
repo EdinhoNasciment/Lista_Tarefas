@@ -2,7 +2,6 @@ package br.edu.ifsp.dmo.listatarefas.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.view.MenuItem;
 
 import androidx.activity.result.ActivityResult;
@@ -68,8 +67,8 @@ public class TasksActivity extends AppCompatActivity implements TaskItemClickLis
                     public void onActivityResult(ActivityResult o) {
                         if (o.getResultCode() == RESULT_OK){
                             String title = o.getData().getStringExtra(Constants.ATTR_TASK_TITLE);
-                            String desc = o.getData().getStringExtra(SyncStateContract.Constants.ATTR_TASK_DESCRIPTION);
-                            String position = o.getData().getStringExtra(Constants.KEY_TASK_POSITION, -1);
+                            String desc = o.getData().getStringExtra(Constants.ATTR_TASK_DESCRIPTION);
+                            int position = o.getData().getIntExtra(Constants.KEY_TASK_POSITION, -1);
                             updateTask(title, desc, position);
                         }
                     }
@@ -103,10 +102,10 @@ public class TasksActivity extends AppCompatActivity implements TaskItemClickLis
     @Override
     public void clickTaskItem(int position){
         Intent intent = new Intent(this, TaskDetailsActivity.class);
-        intent.putExtra(Constants.ATTR_TASK_TITLE);
-        user.getTask(position).getTitle();
-        intent.putExtra(Constants.ATTR_TASK_DESCRIPTION);
-        user.getTask(position).getDescription();
+        intent.putExtra(Constants.ATTR_TASK_TITLE,
+        user.getTask(position).getTitle());
+        intent.putExtra(Constants.ATTR_TASK_DESCRIPTION,
+        user.getTask(position).getDescription());
         intent.putExtra(Constants.KEY_TASK_POSITION, position);
         launcherUpdate.launch(intent);
     }

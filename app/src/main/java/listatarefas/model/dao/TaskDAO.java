@@ -1,13 +1,14 @@
 package listatarefas.model.dao;
-import br.edu.ifsp.dmo.listatarefas.view.Constants;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.edu.ifsp.dmo.listatarefas.view.Constants;
 import listatarefas.model.Task;
 import listatarefas.model.User;
 
@@ -35,7 +36,7 @@ public class TaskDAO {
             jsonObject = new JSONObject();
             try{
                 jsonObject.put(Constants.ATTR_TASK_TITLE, t.getTitle());
-                JSONObject.put(Constants.ATTR_TASK_DESCRIPTION, t.getDescription());
+                jsonObject.put(Constants.ATTR_TASK_DESCRIPTION, t.getDescription());
                 jsonArray.put(jsonObject);
             }catch (JSONException e){
                 Log.e(Constants.TAG, e.getMessage() + "\n on TaskDAO.readSharedPreferences().");
